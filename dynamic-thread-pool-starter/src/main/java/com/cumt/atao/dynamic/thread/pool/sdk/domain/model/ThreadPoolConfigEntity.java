@@ -54,6 +54,9 @@ public class ThreadPoolConfigEntity {
      */
     private int remainingCapacity;
 
+    public ThreadPoolConfigEntity() {}
+
+
     public ThreadPoolConfigEntity(String applicationName, String beanName) {
         this.appName = applicationName;
         this.threadPoolName = beanName;
