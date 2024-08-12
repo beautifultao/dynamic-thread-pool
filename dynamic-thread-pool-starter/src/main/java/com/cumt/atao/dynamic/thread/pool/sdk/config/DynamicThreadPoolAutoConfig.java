@@ -1,7 +1,7 @@
 package com.cumt.atao.dynamic.thread.pool.sdk.config;
 
 import com.cumt.atao.dynamic.thread.pool.sdk.domain.IDynamicThreadPoolService;
-import com.cumt.atao.dynamic.thread.pool.sdk.domain.model.ThreadPoolConfigEntity;
+import com.cumt.atao.dynamic.thread.pool.sdk.domain.entity.ThreadPoolConfigEntity;
 import com.cumt.atao.dynamic.thread.pool.sdk.domain.service.DynamicThreadPoolService;
 import com.cumt.atao.dynamic.thread.pool.sdk.registry.IRegistry;
 import com.cumt.atao.dynamic.thread.pool.sdk.registry.redis.RedisRegistry;
@@ -43,8 +43,15 @@ public class DynamicThreadPoolAutoConfig {
     @Bean("redissonClient")
     public RedissonClient redissonClient(DynamicThreadPoolAutoProperties properties){
 
+        ObjectMapper objectMapper = new ObjectMapper();
+        // 禁用多态类型信息，不写入 @class 字段
+        objectMapper.deactivateDefaultTyping();
+        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        // 使用自定义的 ObjectMapper 创建 JsonJacksonCodec
+        JsonJacksonCodec codec = new JsonJacksonCodec(objectMapper);
+
         Config config = new Config();
-        config.setCodec(JsonJacksonCodec.INSTANCE);
+        config.setCodec(codec);
 
         config.useSingleServer()
                 .setAddress("redis://" + properties.getHost() + ":" + properties.getPort())
@@ -63,6 +70,7 @@ public class DynamicThreadPoolAutoConfig {
         log.info("动态线程池，注册器（redis）链接初始化完成。{} {} {}", properties.getHost(), properties.getPoolSize(), !redissonClient.isShutdown());
         return redissonClient;
     }
+
 
     @Bean
     public IRegistry redisRegister(RedissonClient redissonClient){

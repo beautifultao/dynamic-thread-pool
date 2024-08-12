@@ -2,7 +2,7 @@ package com.cumt.atao.dynamic.thread.pool.sdk.trigger.job;
 
 import com.alibaba.fastjson2.JSON;
 import com.cumt.atao.dynamic.thread.pool.sdk.domain.IDynamicThreadPoolService;
-import com.cumt.atao.dynamic.thread.pool.sdk.domain.model.ThreadPoolConfigEntity;
+import com.cumt.atao.dynamic.thread.pool.sdk.domain.entity.ThreadPoolConfigEntity;
 import com.cumt.atao.dynamic.thread.pool.sdk.registry.IRegistry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;

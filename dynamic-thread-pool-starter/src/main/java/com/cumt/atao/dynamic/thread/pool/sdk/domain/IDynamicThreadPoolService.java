@@ -1,6 +1,6 @@
 package com.cumt.atao.dynamic.thread.pool.sdk.domain;
 
-import com.cumt.atao.dynamic.thread.pool.sdk.domain.model.ThreadPoolConfigEntity;
+import com.cumt.atao.dynamic.thread.pool.sdk.domain.entity.ThreadPoolConfigEntity;
 
 import java.util.List;
 

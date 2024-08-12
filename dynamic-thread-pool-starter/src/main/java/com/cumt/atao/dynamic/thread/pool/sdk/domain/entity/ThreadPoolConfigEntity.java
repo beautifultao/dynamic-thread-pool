@@ -1,4 +1,4 @@
-package com.cumt.atao.dynamic.thread.pool.sdk.domain.model;
+package com.cumt.atao.dynamic.thread.pool.sdk.domain.entity;
 
 import lombok.Data;
 

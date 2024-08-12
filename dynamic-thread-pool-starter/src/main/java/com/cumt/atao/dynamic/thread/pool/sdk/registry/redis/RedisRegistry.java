@@ -1,10 +1,11 @@
 package com.cumt.atao.dynamic.thread.pool.sdk.registry.redis;
 
-import com.cumt.atao.dynamic.thread.pool.sdk.domain.model.ThreadPoolConfigEntity;
+import com.cumt.atao.dynamic.thread.pool.sdk.domain.entity.ThreadPoolConfigEntity;
 import com.cumt.atao.dynamic.thread.pool.sdk.registry.IRegistry;
 import com.cumt.atao.dynamic.thread.pool.sdk.registry.valobj.RegistryEnumVO;
 import org.redisson.api.RBucket;
 import org.redisson.api.RList;
+import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
 
 import java.time.Duration;
@@ -24,7 +25,8 @@ public class RedisRegistry implements IRegistry {
 
     @Override
     public void reportThreadPool(List<ThreadPoolConfigEntity> threadPoolEntities) {
-        RList<ThreadPoolConfigEntity> list = redissonClient.getList(RegistryEnumVO.THREAD_POOL_CONFIG_PARAMETER_LIST_KEY.getKey());
+        RList<ThreadPoolConfigEntity> list = redissonClient.getList(RegistryEnumVO.THREAD_POOL_CONFIG_LIST_KEY.getKey());
+
         list.delete();
         list.addAll(threadPoolEntities);
     }
